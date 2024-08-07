@@ -49,4 +49,24 @@ class SimpleCalculatorControllerTest extends BaseTestController
         // Assert result with expected response
         $this->newTestCase($result)->expectStatus(200)->bodyMatcher(NativeBodyMatcher::init((float) 20))->assert();
     }
+
+    public function testADD()
+    {
+        // Parameters for the API call
+        $input = [];
+        $input['operation'] =
+            Models\OperationTypeEnum::SUM;
+        $input['x'] = 6;
+        $input['y'] = 7;
+
+        // Perform API call
+        $result = null;
+        try {
+            $result = self::$controller->getCalculate($input);
+        } catch (Exceptions\ApiException $e) {
+        }
+
+        // Assert result with expected response
+        $this->newTestCase($result)->expectStatus(200)->assert();
+    }
 }
